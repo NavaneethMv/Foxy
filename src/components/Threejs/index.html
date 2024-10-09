@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foxy Holidays</title>
+    <style>        
+        body { margin: 0; overflow: hidden; background-color: #ffffff; }
+        canvas { display: block; }
+        #info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            text-align: center;
+            /* color: #fbeee0; */
+            color: #ff9625;
+            font-family: 'Work Sans', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            font-stretch: 200;
+            text-shadow: 2px 2px 4px rgba(43, 43, 43, 0.5);
+            pointer-events: none;
+            z-index: 100;
+        }
+        #subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1vw;
+
+        }
+        .buttonmain {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  z-index: 2;
+}
+
+.buttonmain:hover {
+  background-color: #fff;
+}
+
+.buttonmain:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .buttonmain {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        FOXY HOLIDAYS
+        <div id="subtitle">WE TAKE YOU TO HAPPINESS</div>
+        <a href="https://www.github.com" target="_blank">
+            <button class="buttonmain"> LET'S GO </button>
+        </a>       
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        let scene, camera, renderer, mountain, controls;
+        let ambientLight, directionalLight, hemisphereLight;
+        const loader = new THREE.GLTFLoader();
+        let rotationSpeed = 0.001;
+        let autoRotate = true;
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0xafe8e0); // Sky blue background
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            document.body.appendChild(renderer.domElement);
+
+            // Add lights with hard-coded values
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.64);
+            scene.add(ambientLight);
+
+            directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+            directionalLight.position.set(1.2, -2.1, 1);
+            scene.add(directionalLight);
+
+            hemisphereLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.8);
+            scene.add(hemisphereLight);
+
+            // Load mountain model
+            loader.load(
+                'island/scene.gltf',
+                (gltf) => {
+                    mountain = gltf.scene;
+                    scene.add(mountain);
+                    
+                    // Fit camera to object
+                    const box = new THREE.Box3().setFromObject(mountain);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    
+                    // Set camera position for custom angle view
+                    const distance = maxDim * 2;
+                    camera.position.set(
+                        center.x + distance * Math.cos(Math.PI / 1),
+                        center.y + distance * Math.sin(Math.PI / 4),
+                        center.z + distance * Math.cos(Math.PI / 1)
+                    );
+                    camera.lookAt(center);
+
+                    // Set up controls
+                    controls = new THREE.OrbitControls(camera, renderer.domElement);
+                    controls.target.set(center.x, center.y, center.z);
+                    controls.enableDamping = true;
+                    controls.dampingFactor = 0.05;
+                    controls.minDistance = maxDim;
+                    controls.maxDistance = maxDim * 3;
+                    controls.enablePan = false;
+                    controls.autoRotate = true;
+                    controls.autoRotateSpeed = rotationSpeed * 1000;
+                    controls.update();
+
+                    animate();
+                },
+                (xhr) => {
+                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                },
+                (error) => {
+                    console.error('An error occurred loading the model:', error);
+                }
+            );
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (controls) {
+                controls.update();
+            }
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        window.addEventListener('resize', onWindowResize);
+
+        init();
+    </script>
+</body>
+</html>
