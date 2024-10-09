@@ -1,0 +1,122 @@
+/* General styling */
+.services {
+    padding: 4rem 2rem;
+    background-color: #fefaf7;
+    text-align: center;
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Main heading styling */
+.main-heading {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #ff6b35;
+    font-family: 'Arial', sans-serif;
+}
+
+.main-p {
+    font-size: 1.2rem;
+    color: #8b7963;
+    margin-bottom: 2.5rem;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Services icons section */
+.services-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    padding: 2rem 0;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+/* Style for each service card */
+.service-card {
+    width: 30%;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    background-color: #ff6b35;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.icon {
+    color: white;
+}
+
+h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.8rem;
+}
+
+p {
+    font-size: 1rem;
+    color: #8b7963;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Dotted line */
+.services-icons::before {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 2px;
+    background: none;
+    border-top: 2px dotted #8b7963;
+    top: 30%;
+    left: 5%;
+    z-index: -1;
+}
+
+.service-card:nth-child(1) {
+    position: relative;
+}
+
+.service-card:nth-child(2) {
+    position: relative;
+}
+
+.service-card:nth-child(3) {
+    position: relative;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .services-icons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card {
+        width: 80%;
+        margin-bottom: 2rem;
+    }
+
+    .services-icons::before {
+        width: 0;
+        height: 0;
+    }
+}
