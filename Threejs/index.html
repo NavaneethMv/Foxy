@@ -33,47 +33,49 @@
 
         }
         .buttonmain {
-        background-color: #fbeee0;
-        border: 2px solid #422800;
-        border-radius: 30px;
-        box-shadow: #422800 4px 4px 0 0;
-        color: #422800;
-        cursor: pointer;
-        display: inline-block;
-        font-weight: 600;
-        font-size: 18px;
-        padding: 0 18px;
-        line-height: 50px;
-        text-align: center;
-        text-decoration: none;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        }
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 
-        .buttonmain:hover {
-        background-color: #fff;
-        }
+.buttonmain:hover {
+  background-color: #fff;
+}
 
-        .buttonmain:active {
-        box-shadow: #422800 2px 2px 0 0;
-        transform: translate(2px, 2px);
-        }
+.buttonmain:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
 
-        @media (min-width: 768px) {
-        .buttonmain{
-            min-width: 120px;
-            padding: 0 25px;
-        }
+@media (min-width: 768px) {
+  .buttonmain {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+
         }
     </style>
 </head>
 <body>
     <div id="info">
         FOXY HOLIDAYS
-        <div id="subtitle">Welcome to Your Dream Vacation</div>
-        <button class="buttonmain">  Click me </button>
-
+        <div id="subtitle">WE TAKE YOU TO HAPPINESS</div>
+        <a href="https://www.github.com" target="_blank">
+            <button class="buttonmain"> LET'S GO </button>
+        </a>       
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -118,7 +120,7 @@
                     const size = box.getSize(new THREE.Vector3());
                     const maxDim = Math.max(size.x, size.y, size.z);
                     
-                    // Set camera position for 45-degree angle view
+                    // Set camera position for custom angle view
                     const distance = maxDim * 2;
                     camera.position.set(
                         center.x + distance * Math.cos(Math.PI / 1),
