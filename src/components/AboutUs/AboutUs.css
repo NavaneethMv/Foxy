@@ -1,0 +1,142 @@
+.about-us {
+    padding: 60px 0;
+    background-color: #fff7e6;
+    /* Light orange background */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.about-us-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff6f3c;
+    /* Bright orange heading */
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.about-us-description {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+/* Stats Section */
+.about-us-stats {
+    display: flex;
+    /* Horizontal layout */
+    justify-content: space-between;
+    gap: 30px;
+    text-align: center;
+}
+
+.about-us-item {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+.about-us-item:hover {
+    transform: translateY(-10px);
+}
+
+.about-us-icon {
+    font-size: 3rem;
+    color: #ff6f3c;
+    margin-bottom: 20px;
+}
+
+.about-us-item h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+.about-us-item p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Gallery Section */
+.gallery-section {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.gallery-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 40px;
+}
+
+.gallery-collage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    position: relative;
+}
+
+.gallery-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+/* Custom positioning for a collage look */
+.img1 {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+}
+
+.img2 {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+}
+
+.img3 {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.img4 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.img5 {
+    grid-column: 1 / span 3;
+    grid-row: 3;
+    margin-top: -50px;
+}
+
+@media (max-width: 768px) {
+    .gallery-collage {
+        grid-template-columns: 1fr;
+    }
+
+    .img1,
+    .img2,
+    .img3,
+    .img4,
+    .img5 {
+        grid-column: span 1;
+    }
+}
