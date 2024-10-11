@@ -6,17 +6,18 @@ import ReviewCardCarousel from './components/ReviewCards/ReviewCard';
 import ServicesIcons from './components/ServicesIcons/ServicesIcons';
 import Footer from './components/Footer/Footer';
 import IslandScene from './components/IslandScene/IslandScene';
-
+import AboutUs from './components/AboutUs/AboutUs';
 
 function App() {
   return (
     <div>
-      <IslandScene/>
+      <IslandScene />
       <NavBar />
       <HomeVideo />
       <ScrollDown />
       <ServicesIcons />
       <ReviewCardCarousel />
+      <AboutUs />
       <Footer />
     </div>
   );
