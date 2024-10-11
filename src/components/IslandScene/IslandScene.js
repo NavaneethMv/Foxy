@@ -8,31 +8,72 @@ const IslandScene = () => {
   const mountRef = useRef(null);
 
   useEffect(() => {
-    let scene, camera, renderer, mountain, controls;
+    let scene, camera, renderer, mountain, planes = [], controls;
     const loader = new GLTFLoader();
-    let rotationSpeed = 0.001;
+    const numPlanes = 10; // Number of paper planes
+    let boundingBox = new THREE.Box3();
+
+    class RandomPlane {
+      constructor(mesh) {
+        this.mesh = mesh;
+        this.velocity = new THREE.Vector3(
+          Math.random() - 0.5,
+          Math.random() - 0.5,
+          Math.random() - 0.5
+        ).normalize().multiplyScalar(0.2);
+        this.changeDirectionCounter = 0;
+      }
+
+      updatePosition() {
+        this.mesh.position.add(this.velocity);
+
+        // Randomly change direction occasionally
+        this.changeDirectionCounter++;
+        if (this.changeDirectionCounter > 100) { // Change direction every ~100 frames
+          this.velocity.set(
+            Math.random() - 0.5,
+            Math.random() - 0.5,
+            Math.random() - 0.5
+          ).normalize().multiplyScalar(0.2);
+          this.changeDirectionCounter = 0;
+        }
+
+        // Bounce off the bounding box
+        if (this.mesh.position.x < boundingBox.min.x || this.mesh.position.x > boundingBox.max.x) {
+          this.velocity.x *= -1;
+        }
+        if (this.mesh.position.y < boundingBox.min.y || this.mesh.position.y > boundingBox.max.y) {
+          this.velocity.y *= -1;
+        }
+        if (this.mesh.position.z < boundingBox.min.z || this.mesh.position.z > boundingBox.max.z) {
+          this.velocity.z *= -1;
+        }
+
+        // Update rotation to face direction of movement
+        this.mesh.lookAt(this.mesh.position.clone().add(this.velocity));
+      }
+    }
 
     const init = () => {
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 0.1, 1000);
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x87CEEB); // Bright sky blue background
+      renderer.setClearColor(0x87CEEB);
       renderer.outputEncoding = THREE.RGBAFormat;
       mountRef.current.appendChild(renderer.domElement);
 
-      // Updated lighting for a brighter, more vibrant scene
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Increased intensity
+      // Lighting setup (unchanged)
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1);
       scene.add(ambientLight);
 
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Increased intensity
-      directionalLight.position.set(5, 10, 7); // Adjusted position for better highlights
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+      directionalLight.position.set(5, 10, 7);
       scene.add(directionalLight);
 
-      const hemisphereLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1.5); // Increased intensity
+      const hemisphereLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1.5);
       scene.add(hemisphereLight);
 
-      // Add a point light to simulate sun
       const pointLight = new THREE.PointLight(0xffff00, 1, 100);
       pointLight.position.set(50, 50, 50);
       scene.add(pointLight);
@@ -44,21 +85,18 @@ const IslandScene = () => {
           mountain = gltf.scene;
           scene.add(mountain);
           
-          // Enhance material colors if needed
           mountain.traverse((child) => {
             if (child.isMesh) {
-              child.material.color.multiplyScalar(1.2); // Brighten colors
-              child.material.emissive.setHex(0x222222); // Add slight emissive glow
+              child.material.color.multiplyScalar(1.2);
+              child.material.emissive.setHex(0x222222);
             }
           });
           
-          // Fit camera to object
-          const box = new THREE.Box3().setFromObject(mountain);
-          const center = box.getCenter(new THREE.Vector3());
-          const size = box.getSize(new THREE.Vector3());
+          boundingBox.setFromObject(mountain);
+          const center = boundingBox.getCenter(new THREE.Vector3());
+          const size = boundingBox.getSize(new THREE.Vector3());
           const maxDim = Math.max(size.x, size.y, size.z);
           
-          // Set camera position for custom angle view
           const distance = maxDim * 2;
           camera.position.set(
             center.x + distance * Math.cos(Math.PI / 4),
@@ -67,7 +105,6 @@ const IslandScene = () => {
           );
           camera.lookAt(center);
 
-          // Set up controls
           controls = new OrbitControls(camera, renderer.domElement);
           controls.target.set(center.x, center.y, center.z);
           controls.enableDamping = true;
@@ -76,26 +113,52 @@ const IslandScene = () => {
           controls.maxDistance = maxDim * 3;
           controls.enablePan = false;
           controls.autoRotate = true;
-          controls.autoRotateSpeed = rotationSpeed * 1000;
+          controls.autoRotateSpeed = 1;
           controls.update();
 
-          animate();
+          // Load and create multiple paper planes
+          loader.load(
+            'plane/scene.gltf',
+            (gltf) => {
+              const planeMesh = gltf.scene;
+              planeMesh.scale.set(0.07, 0.07, 0.07);
+
+              for (let i = 0; i < numPlanes; i++) {
+                const planeCopy = planeMesh.clone();
+                planeCopy.position.set(
+                  center.x + (Math.random() - 0.5) * size.x * 0.8,
+                  center.y + (Math.random() - 0.5) * size.y * 0.8,
+                  center.z + (Math.random() - 0.5) * size.z * 0.8
+                );
+                scene.add(planeCopy);
+                planes.push(new RandomPlane(planeCopy));
+              }
+              
+              animate();
+            },
+            (xhr) => {
+              console.log((xhr.loaded / xhr.total * 100) + '% loaded (paper planes)');
+            },
+            (error) => {
+              console.error('An error occurred loading the paper plane model:', error);
+            }
+          );
         },
         (xhr) => {
-          console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+          console.log((xhr.loaded / xhr.total * 100) + '% loaded (island)');
         },
         (error) => {
-          console.error('An error occurred loading the model:', error);
+          console.error('An error occurred loading the island model:', error);
         }
       );
-      
     };
+
     const handleButtonClick = () => {
-        const nextSection = document.getElementById('NavBar');
-        if (nextSection) {
-          nextSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      };
+      const nextSection = document.getElementById('NavBar');
+      if (nextSection) {
+        nextSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
 
     const button = document.querySelector('.island-scene-button');
     if (button) {
@@ -107,6 +170,7 @@ const IslandScene = () => {
       if (controls) {
         controls.update();
       }
+      planes.forEach(plane => plane.updatePosition());
       renderer.render(scene, camera);
     };
 
@@ -123,6 +187,9 @@ const IslandScene = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      if (button) {
+        button.removeEventListener('click', handleButtonClick);
+      }
       mountRef.current?.removeChild(renderer.domElement);
     };
   }, []);
@@ -139,7 +206,6 @@ const IslandScene = () => {
       </div>
     </>
   );
-
 };
 
 export default IslandScene;
