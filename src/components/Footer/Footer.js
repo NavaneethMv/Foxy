@@ -11,7 +11,7 @@ const Footer = () => {
                 <div className="hero-content">
                     <h1>Let's explore the beauty of the world</h1>
                     <p>Let's don't miss the 50% discount and explore the beautiful of the world.</p>
-                    <button className="get-started-btn">Get started</button>
+                    <button className="get-started-btn">Contact Us</button>
                 </div>
                 <div className="image-gallery">
                     <img src="/api/placeholder/300/200" alt="Travelers with raised arms" />
@@ -21,8 +21,8 @@ const Footer = () => {
             </div>
             <div className="footer-content">
                 <div className="footer-column">
-                    <h2 className="footer-logo">Travelbu</h2>
-                    <p className="footer-description">Enjoy your traveling with Travelbu</p>
+                    <h2 className="footer-logo">Foxy Holidays</h2>
+                    <p className="footer-description">We take you to happiness</p>
                 </div>
                 <div className="footer-column">
                     <h3>Menu</h3>
@@ -48,7 +48,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-bottom">
-                <p>©2023 Travelbu LTD. All rights reserved.</p>
+                <p>©2023 Foxy Holidays LTD. All rights reserved.</p>
                 <div className="footer-social">
                     <a href="#" className="social-icon"><Instagram size={20} /></a>
                     <a href="#" className="social-icon"><Facebook size={20} /></a>
