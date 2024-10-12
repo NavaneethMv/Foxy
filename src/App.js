@@ -7,6 +7,7 @@ import ServicesIcons from './components/ServicesIcons/ServicesIcons';
 import Footer from './components/Footer/Footer';
 import IslandScene from './components/IslandScene/IslandScene';
 import AboutUs from './components/AboutUs/AboutUs';
+import VisaCarousel from './components/VisaCarousel/VisaCarousel';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <NavBar />
       <HomeVideo />
       <ScrollDown />
+      <VisaCarousel />
       <ServicesIcons />
       <ReviewCardCarousel />
       <AboutUs />
