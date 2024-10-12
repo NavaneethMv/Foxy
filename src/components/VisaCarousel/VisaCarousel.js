@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
-import './VisaCoursel.css'
+import './VisaCarousel.css';
 
 const VisaCarousel = () => {
     const swiperRef = useRef(null);
