@@ -10,16 +10,16 @@ const IslandScene = () => {
   useEffect(() => {
     let scene, camera, renderer, mountain, planes = [], controls;
     const loader = new GLTFLoader();
-    const numPlanes = 10; // Number of paper planes
+    const numPlanes = 6; // Number of paper planes
     let boundingBox = new THREE.Box3();
 
     class RandomPlane {
       constructor(mesh) {
         this.mesh = mesh;
         this.velocity = new THREE.Vector3(
-          Math.random() - 0.5,
-          Math.random() - 0.5,
-          Math.random() - 0.5
+          Math.random() - 0.15,
+          Math.random() - 0.15,
+          Math.random() - 0.15
         ).normalize().multiplyScalar(0.2);
         this.changeDirectionCounter = 0;
       }
@@ -29,7 +29,7 @@ const IslandScene = () => {
 
         // Randomly change direction occasionally
         this.changeDirectionCounter++;
-        if (this.changeDirectionCounter > 100) { // Change direction every ~100 frames
+        if (this.changeDirectionCounter > 200) { // Change direction every ~100 frames
           this.velocity.set(
             Math.random() - 0.5,
             Math.random() - 0.5,
