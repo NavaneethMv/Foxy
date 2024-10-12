@@ -1,71 +1,50 @@
+/* About Us section */
 .about-us {
-    padding: 60px 0;
-    background-color: #fff7e6;
-    /* Light orange background */
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+    padding: 60px 20px;
+    background-color: #fef7e0;
+    /* Light background */
 }
 
 .about-us-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #ff6f3c;
-    /* Bright orange heading */
+    font-size: 3rem;
+    color: #ff6b35;
+    /* Bright orange for title */
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .about-us-description {
     font-size: 1.2rem;
+    color: #444;
     text-align: center;
-    color: #666;
     max-width: 800px;
-    margin: 0 auto 60px;
+    margin: 0 auto 50px;
 }
 
-/* Stats Section */
 .about-us-stats {
     display: flex;
-    /* Horizontal layout */
-    justify-content: space-between;
-    gap: 30px;
-    text-align: center;
+    justify-content: space-around;
+    margin-bottom: 40px;
 }
 
 .about-us-item {
-    flex: 1;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease-in-out;
-}
-
-.about-us-item:hover {
-    transform: translateY(-10px);
+    text-align: center;
+    max-width: 250px;
 }
 
 .about-us-icon {
-    font-size: 3rem;
-    color: #ff6f3c;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: #ff6b35;
+    margin-bottom: 15px;
 }
 
 .about-us-item h3 {
     font-size: 1.5rem;
-    font-weight: 600;
     color: #222;
-    margin-bottom: 15px;
 }
 
 .about-us-item p {
-    font-size: 1rem;
     color: #666;
-    line-height: 1.6;
 }
 
 /* Gallery Section */
@@ -81,62 +60,43 @@
     margin-bottom: 40px;
 }
 
+/* Full-width Collage (without gradient fade) */
 .gallery-collage {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Dynamic columns */
     gap: 10px;
     position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    padding: 20px;
 }
 
+/* Image styles */
 .gallery-image {
     width: 100%;
     height: auto;
+    /* Maintain aspect ratio */
+    max-height: 350px;
+    /* Keep images from getting too large */
+    object-fit: cover;
+    /* Crop images to fit */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
 }
 
+/* Hover effect */
 .gallery-image:hover {
     transform: scale(1.05);
 }
 
-/* Custom positioning for a collage look */
-.img1 {
-    grid-column: 1 / span 2;
-    grid-row: 1;
-}
-
-.img2 {
-    grid-column: 3;
-    grid-row: 1 / span 2;
-}
-
-.img3 {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.img4 {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-.img5 {
-    grid-column: 1 / span 3;
-    grid-row: 3;
-    margin-top: -50px;
-}
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .gallery-collage {
         grid-template-columns: 1fr;
-    }
-
-    .img1,
-    .img2,
-    .img3,
-    .img4,
-    .img5 {
-        grid-column: span 1;
+        /* Single column on small screens */
+        margin-left: 0;
     }
 }
