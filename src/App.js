@@ -15,8 +15,10 @@ function App() {
       <IslandScene />
       <NavBar />
       <HomeVideo />
+      <div className='rounded-section'>
+        <VisaCarousel />
+      </div>
       <ScrollDown />
-      <VisaCarousel />
       <ServicesIcons />
       <ReviewCardCarousel />
       <AboutUs />

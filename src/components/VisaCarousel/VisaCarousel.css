@@ -21,13 +21,14 @@ section {
     padding-bottom: 60px;
 }
 
-/* Set slide width to 10px */
+/* Set slide width to 150px */
 .swiper-slide {
     width: 150px;
     /* Desired width */
     height: 350px;
     /* Height remains increased */
-    border-radius: 15px;
+    border-radius: 15px 15px 0 0;
+    /* Only round top corners */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,6 +38,14 @@ section {
     position: relative;
     padding-top: 60px;
     /* Add padding to create space for the description */
+}
+
+/* Explicitly set border-radius for bottom corners to 0 */
+.swiper-slide:last-child {
+    border-bottom-left-radius: 0;
+    /* Ensure bottom left corner is square */
+    border-bottom-right-radius: 0;
+    /* Ensure bottom right corner is square */
 }
 
 .swiper-slide-active {
@@ -87,7 +96,6 @@ section {
     font-family: "Roboto", sans-serif;
     font-weight: 300;
     position: relative;
-
     opacity: 0;
     /* Initially hidden */
     transition: opacity 0.3s ease;
@@ -103,23 +111,27 @@ section {
 
 /* Image slide backgrounds */
 .swiper-slide--one {
-    background-image: url("https://swiperjs.com/demos/images/nature-1.jpg");
+    background-image: url("C:\Users\mvnav\dev\proj\Foxy\public\foxy_country\Bahrain.jpg");
 }
 
 .swiper-slide--two {
-    background-image: url("https://swiperjs.com/demos/images/nature-2.jpg");
+    background-image: url("C:\Users\mvnav\dev\proj\Foxy\public\foxy_country\China.jpg");
 }
 
 .swiper-slide--three {
-    background-image: url("https://swiperjs.com/demos/images/nature-3.jpg");
+    background-image: url("C:\Users\mvnav\dev\proj\Foxy\public\foxy_country\Dubai.jpg");
 }
 
 .swiper-slide--four {
-    background-image: url("https://swiperjs.com/demos/images/nature-4.jpg");
+    background-image: url("C:\Users\mvnav\dev\proj\Foxy\public\foxy_country\Malayasia.jpg");
 }
 
 .swiper-slide--five {
-    background-image: url("https://swiperjs.com/demos/images/nature-5.jpg");
+    background-image: url("C:\Users\mvnav\dev\proj\Foxy\public\foxy_country\Singapore.jpg");
+}
+
+.swiper-slide--six {
+    background-image: url("C:\Users\mvnav\dev\proj\Foxy\public\foxy_country\Thailand.jpg");
 }
 
 .carousel-container {

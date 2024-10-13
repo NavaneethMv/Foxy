@@ -1,13 +1,11 @@
-import './HomeVideo.css'
-import React from 'react'
-import mainVideo from './home_video.mp4'
-
-
+import './HomeVideo.css';
+import React from 'react';
+import mainVideo from './home_video.mp4';
 
 function HomeVideo() {
     return (
         <div className='homevid'>
-            <div className='homevid-container'>
+            <div className='homevid-container rounded-component'>
                 <video autoPlay loop muted src={mainVideo} preload="auto"></video>
             </div>
 
@@ -18,6 +16,5 @@ function HomeVideo() {
         </div>
     );
 }
-
 
 export default HomeVideo;

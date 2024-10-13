@@ -2,25 +2,27 @@ import React, { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Mousewheel } from "swiper/modules"; // Import Mousewheel module
 
+// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
-import './VisaCoursel.css'
+// Import custom styles
+import "./VisaCarousel.css";
 
-const VisaCarousel = () => {
-    const swiperRef = useRef(null);
+const App = () => {
+    const swiperRef = useRef(null); // Create a ref for the Swiper instance
 
     useEffect(() => {
-        const swiper = swiperRef.current.swiper;
+        const swiper = swiperRef.current.swiper; // Access the Swiper instance
         const swiperContainer = document.querySelector(".swiper");
 
         const handleClick = (event) => {
-            const activeIndex = swiper.activeIndex;
+            const activeIndex = swiper.activeIndex; // Get the index of the currently active slide
             const slides = document.querySelectorAll(".swiper-slide");
-            const activeSlide = slides[activeIndex];
-            const slideRect = activeSlide.getBoundingClientRect();
-            const clickX = event.clientX;
+            const activeSlide = slides[activeIndex]; // Get the currently active slide
+            const slideRect = activeSlide.getBoundingClientRect(); // Get the dimensions of the active slide
+            const clickX = event.clientX; // Get the x-coordinate of the click
 
             // If clicked on the left side of the active slide, go to the previous slide
             if (clickX < slideRect.left + slideRect.width / 2) {
@@ -169,4 +171,4 @@ const VisaCarousel = () => {
     );
 };
 
-export default VisaCarousel;
+export default App;
