@@ -32,7 +32,20 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.rounded-section {
+  border-radius: 40px;
+  /* Adjust the value as needed */
+  overflow: hidden;
+  /* Ensures content stays within rounded corners */
+  background-color: #f0f0f0;
+  /* Set a background color for visibility */
+  padding: 20px;
+  /* Adjust padding as needed */
 }
