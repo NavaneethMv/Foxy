@@ -14,7 +14,7 @@ const App = () => {
     const swiperRef = useRef(null); // Create a ref for the Swiper instance
 
     useEffect(() => {
-        const swiper = swiperRef.current.swiper; // Access the Swiper instance
+        const swiper = swiperRef.current.swiper; // Access the Swiper instAccess the Swiper instanceance
         const swiperContainer = document.querySelector(".swiper");
 
         const handleClick = (event) => {

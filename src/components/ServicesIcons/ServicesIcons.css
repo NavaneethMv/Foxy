@@ -1,8 +1,9 @@
 /* General styling */
 .services {
-    padding: 4rem 2rem;
-    background-color: #fefaf7;
+    padding: 3rem 2rem 2rem 2rem;
+    background-color: var(--primary-bg);
     text-align: center;
+    font-family: 'Work Sans', Arial, sans-serif;
 }
 
 .services-container {
@@ -12,17 +13,20 @@
 
 /* Main heading styling */
 .main-heading {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #ff6b35;
-    font-family: 'Arial', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 0.7rem;
+    color: var(--primary-accent);
+    font-family: 'Work Sans', Arial, sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.5px;
 }
 
 .main-p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #8b7963;
-    margin-bottom: 2.5rem;
-    font-family: 'Arial', sans-serif;
+    margin-bottom: 1.5rem;
+    font-family: 'Work Sans', Arial, sans-serif;
+    font-weight: 500;
 }
 
 /* Services icons section */
@@ -31,7 +35,7 @@
     justify-content: space-between;
     align-items: flex-start;
     position: relative;
-    padding: 2rem 0;
+    padding: 1.2rem 0 0 0;
     flex-wrap: wrap;
     gap: 2rem;
 }
@@ -39,26 +43,29 @@
 /* Style for each service card */
 .service-card {
     width: 30%;
-    padding: 1.5rem;
+    padding: 1.2rem;
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.2s;
     position: relative;
+    background: var(--card-bg);
+    border-radius: 1.2rem;
+    box-shadow: var(--card-shadow);
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 4px 20px rgba(255,107,53,0.10);
 }
 
 .icon-wrapper {
     width: 80px;
     height: 80px;
-    margin: 0 auto;
-    background-color: #ff6b35;
+    margin: 0 auto 1.2rem auto;
+    background-color: var(--primary-accent);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
 }
 
 .icon {
@@ -66,16 +73,17 @@
 }
 
 h2 {
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 1.15rem;
+    font-weight: 700;
     color: #333;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.7rem;
+    font-family: 'Work Sans', Arial, sans-serif;
 }
 
 p {
     font-size: 1rem;
     color: #8b7963;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Work Sans', Arial, sans-serif;
 }
 
 /* Dotted line */

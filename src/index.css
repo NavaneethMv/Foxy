@@ -1,12 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+:root {
+  --primary-bg: #fefaf7;
+  --primary-accent: #ff6b35;
+  --primary-dark: #23272f;
+  --primary-text: #222;
+  --secondary-text: #6b6b6b;
+  --card-bg: #fff;
+  --card-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
 
 body {
   margin: 0;
-  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--primary-bg);
+  color: var(--primary-text);
 }
 
 code {

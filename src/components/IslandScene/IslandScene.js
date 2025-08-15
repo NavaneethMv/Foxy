@@ -84,19 +84,19 @@ const IslandScene = () => {
         (gltf) => {
           mountain = gltf.scene;
           scene.add(mountain);
-          
+
           mountain.traverse((child) => {
             if (child.isMesh) {
               child.material.color.multiplyScalar(1.2);
               child.material.emissive.setHex(0x222222);
             }
           });
-          
+
           boundingBox.setFromObject(mountain);
           const center = boundingBox.getCenter(new THREE.Vector3());
           const size = boundingBox.getSize(new THREE.Vector3());
           const maxDim = Math.max(size.x, size.y, size.z);
-          
+
           const distance = maxDim * 2;
           camera.position.set(
             center.x + distance * Math.cos(Math.PI / 4),
@@ -115,6 +115,24 @@ const IslandScene = () => {
           controls.autoRotate = true;
           controls.autoRotateSpeed = 1;
           controls.update();
+          controls.enableZoom = true;
+          controls.enableRotate = true;
+          controls.enableKeys = false;
+          controls.mouseButtons = {
+            LEFT: THREE.MOUSE.ROTATE,
+            MIDDLE: null,
+            RIGHT: THREE.MOUSE.PAN
+          };
+          controls.touches = {
+            ONE: THREE.TOUCH.ROTATE,
+            TWO: THREE.TOUCH.DOLLY_PAN
+          };
+          // Disable scroll-to-zoom
+          renderer.domElement.addEventListener('wheel', (e) => {
+            if (document.activeElement === renderer.domElement) {
+              e.preventDefault();
+            }
+          }, { passive: false });
 
           // Load and create multiple paper planes
           loader.load(
@@ -133,7 +151,7 @@ const IslandScene = () => {
                 scene.add(planeCopy);
                 planes.push(new RandomPlane(planeCopy));
               }
-              
+
               animate();
             },
             (xhr) => {
@@ -194,6 +212,13 @@ const IslandScene = () => {
     };
   }, []);
 
+  const handleLetsGo = () => {
+    const nextSection = document.getElementById('homepage-hero-section');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <div className="island-scene-container">
@@ -201,7 +226,7 @@ const IslandScene = () => {
         <div className="island-scene-content">
           <h1 className="island-scene-title">FOXY HOLIDAYS</h1>
           <div className="island-scene-subtitle">WE TAKE YOU TO HAPPINESS</div>
-          <button className="island-scene-button">LET'S GO</button>
+          <button className="island-scene-button" onClick={handleLetsGo}>LET'S GO</button>
         </div>
       </div>
     </>
